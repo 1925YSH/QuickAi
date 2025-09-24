@@ -18,22 +18,13 @@ app.use(express.json());
 app.use(clerkMiddleware())
 
 //cors
-const cors = require("cors");
-
-const allowedOrigins = [
-  "http://localhost:5173", 
-  "https://quick-ai-client-gold.vercel.app"
-];
-
 app.use(cors({
-  origin: function (origin, callback) {
-    if (!origin || allowedOrigins.includes(origin)) {
-      callback(null, true);
-    } else {
-      callback(new Error("Not allowed by CORS"));
-    }
-  },
-  credentials: true
+  origin: [
+    "http://localhost:5173",
+    "https://quick-ai-client-gold.vercel.app"
+  ], // frontend URL
+  methods: "GET,POST,PUT,DELETE",  // allowed methods
+  credentials: true                // if you’re using cookies or auth headers
 }));
 
 // Routes
